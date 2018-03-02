@@ -1,0 +1,6 @@
+
+(D) 2018-01-01 Buy something @shop due:2018-01-31 @computer
+(C) 2018-01-31 Fix something else @home +fix
+h:1 @work @computer
+(R) Do something at home @home +tools
+Fix something +fix due:2018-01-30
