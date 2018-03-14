@@ -58,7 +58,7 @@ func FindDateInFile(file *os.File, date string) []string {
 		match := rexDate.FindString(line)
 		if match != "" {
 			timeEvent, _ := time.Parse("due:2006-01-02", match)
-			if timeEvent.Before(timeNow) {
+			if timeEvent.Before(timeNow) || timeEvent.Equal(timeNow) {
 				output = append(output, line)
 			}
 		}
