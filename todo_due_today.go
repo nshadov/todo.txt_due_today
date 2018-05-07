@@ -11,6 +11,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	ct "github.com/daviddengcn/go-colortext"
 )
 
 var rexDate, _ = regexp.Compile("due:[0-9]{4}-[0-9]{2}-[0-9]{2}")
@@ -87,6 +89,19 @@ func IsFinished(line string) bool {
 	return false
 }
 
+// PrintColorText displays color lines
+func PrintColorText(line string) {
+	if strings.HasPrefix(line, "(A)") {
+		ct.Foreground(ct.Yellow, false)
+	} else if strings.HasPrefix(line, "(B)") {
+		ct.Foreground(ct.Green, false)
+	} else if strings.HasPrefix(line, "(C)") {
+		ct.Foreground(ct.Blue, false)
+	}
+	fmt.Println(line)
+	ct.ResetColor()
+}
+
 func main() {
 	var context string
 
@@ -100,7 +115,7 @@ func main() {
 	sort.Strings(todo)
 	for _, line := range todo {
 		if FilterContext(line, context) != nil && IsFinished(line) == false {
-			fmt.Println(line)
+			PrintColorText(line)
 		}
 	}
 }
